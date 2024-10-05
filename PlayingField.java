@@ -70,9 +70,6 @@ public class PlayingField {
         System.out.println();
     }
 
-    public void drawField2() {
-
-    }
 
     /**
      * @param pos    the position the stone is inserted to
