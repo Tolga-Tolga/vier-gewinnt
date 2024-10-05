@@ -21,11 +21,11 @@ import java.io.InputStreamReader;
             System.out.println("Config player turn error!");
             return;
         }
-        if (Config.PLAYFIELD_SIZE_X < 1) {
+        if (Config.PLAYFIELD_SIZE_X < 4) {
             System.out.println("Config playfield size error!");
             return;
         }
-        if (Config.PLAYFIELD_SIZE_Y < 1) {
+        if (Config.PLAYFIELD_SIZE_Y < 4) {
             System.out.println("Config playfield size error!");
             return;
         }
