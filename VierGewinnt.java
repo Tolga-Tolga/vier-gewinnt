@@ -3,9 +3,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-/**
-  * VierGewinnt
-  */
+
  public class VierGewinnt {
     private Spielfeld spielfeld;
     private BufferedReader reader;
@@ -55,7 +53,6 @@ import java.io.InputStreamReader;
                     }
                 }
             } catch (Exception e) {
-                // e.printStackTrace();
                 System.out.println("Gib eine Zahl ein!");
             }
         }

@@ -1,7 +1,7 @@
 import java.util.Arrays;
 
 public class Spielfeld {
-    // spielfeld defined as 0 for free space, 1 for player 1 and 2 for player 2.
+    // Play field defined as 0 for free space, 1 for player 1 and 2 for player 2.
     private int[][] spielfeld;
     private int dim_x;
     private int dim_y;
@@ -21,8 +21,6 @@ public class Spielfeld {
      * Draws the play field.
      */
     public void drawField() {
-        // System.out.print("\033[H\033[2J");
-        // System.out.flush();
         for (int i = 0; i < spielfeld.length; i++) {
             for (int j = 0; j < spielfeld[i].length * 2 + 1; j++) {
                 System.out.print('-');
@@ -78,13 +76,16 @@ public class Spielfeld {
             return 1;
 
         } catch (Exception e) {
-            // e.printStackTrace();
             return 2;
         }
     }
 
+    /**
+     * @param player
+     * @return true if player has chain of 4
+     */
     public boolean hasPlayer4Chain(int player) {
-        // Überprüfe horizontale Ketten
+        // Check for horizontal chains
         for (int y = 0; y < dim_y; y++) {
             for (int x = 0; x <= dim_x - 4; x++) {
                 if (spielfeld[y][x] == player && spielfeld[y][x + 1] == player &&
@@ -94,7 +95,7 @@ public class Spielfeld {
             }
         }
     
-        // Überprüfe vertikale Ketten
+        // Check for vertical chains
         for (int x = 0; x < dim_x; x++) {
             for (int y = 0; y <= dim_y - 4; y++) {
                 if (spielfeld[y][x] == player && spielfeld[y + 1][x] == player &&
@@ -104,7 +105,7 @@ public class Spielfeld {
             }
         }
     
-        // Überprüfe diagonale Ketten (von links unten nach rechts oben)
+        // Check for diagonal chains (from lower left to upper right)
         for (int y = 3; y < dim_y; y++) {
             for (int x = 0; x <= dim_x - 4; x++) {
                 if (spielfeld[y][x] == player && spielfeld[y - 1][x + 1] == player &&
@@ -114,7 +115,7 @@ public class Spielfeld {
             }
         }
     
-        // Überprüfe diagonale Ketten (von links oben nach rechts unten)
+        // Check for diagonal chains (from upper left to lower right)
         for (int y = 0; y <= dim_y - 4; y++) {
             for (int x = 0; x <= dim_x - 4; x++) {
                 if (spielfeld[y][x] == player && spielfeld[y + 1][x + 1] == player &&
@@ -124,6 +125,6 @@ public class Spielfeld {
             }
         }
     
-        return false; // Wenn keine Kette gefunden wurde
+        return false; // If no chain is found
     }    
 }
