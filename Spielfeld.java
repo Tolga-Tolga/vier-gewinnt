@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class Spielfeld {
     // Play field defined as 0 for free space, 1 for player 1 and 2 for player 2.
     private int[][] spielfeld;
@@ -125,4 +127,8 @@ public class Spielfeld {
     
         return false; // If no chain is found
     }    
+
+    public boolean fieldIsFull() {
+        return Arrays.stream(spielfeld).flatMapToInt(Arrays::stream).anyMatch(t -> t == 0);
+    }
 }

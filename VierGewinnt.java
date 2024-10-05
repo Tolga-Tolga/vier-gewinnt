@@ -9,6 +9,7 @@ import java.io.InputStreamReader;
     private String playerInput;
     private int playerTurn;
     private boolean gameOver = false;
+    private boolean noOneWon = false;
     public static void main(String[] args) {
         VierGewinnt gameController = new VierGewinnt();
         gameController.create();    
@@ -47,7 +48,12 @@ import java.io.InputStreamReader;
                 if (reader.ready()) {
                     turn();
                     if (gameOver) {
-                        System.out.println("Spieler " + playerTurn + " hat gewonnen!");
+                        if (noOneWon) {
+                            System.out.println("Keiner hat gewonnen!");
+                        }
+                        else{
+                           System.out.println("Spieler " + playerTurn + " hat gewonnen!"); 
+                        }
                         break;
                     }
                 }
@@ -64,6 +70,11 @@ import java.io.InputStreamReader;
         switch (ret) {
             case 0:
                 spielfeld.drawField();
+                if (!spielfeld.fieldIsFull()) {
+                    gameOver = true;
+                    noOneWon = true;
+                    return;
+                }
                 if (spielfeld.hasPlayer4Chain(playerTurn)) {
                     gameOver = true;
                     return;
