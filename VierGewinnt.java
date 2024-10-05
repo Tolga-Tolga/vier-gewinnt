@@ -4,7 +4,7 @@ import java.io.InputStreamReader;
 
 
  public class VierGewinnt {
-    private Spielfeld spielfeld;
+    private PlayingField playingField;
     private BufferedReader reader;
     private String playerInput;
     private int playerTurn;
@@ -30,7 +30,7 @@ import java.io.InputStreamReader;
             System.out.println("Config playfield size error!");
             return;
         }
-        this.spielfeld = new Spielfeld(Config.PLAYFIELD_SIZE_X, Config.PLAYFIELD_SIZE_Y);
+        this.playingField = new PlayingField(Config.PLAYFIELD_SIZE_X, Config.PLAYFIELD_SIZE_Y);
         try {
             reader = new BufferedReader(new InputStreamReader(System.in));
         } catch (Exception e) {
@@ -66,16 +66,16 @@ import java.io.InputStreamReader;
     private void turn() throws IOException {
         playerInput = reader.readLine();
         int num = Integer.parseInt(playerInput);
-        int ret = spielfeld.insertStone(num, playerTurn);
+        int ret = playingField.insertStone(num, playerTurn);
         switch (ret) {
             case 0:
-                spielfeld.drawField();
-                if (!spielfeld.fieldIsFull()) {
+                playingField.drawField();
+                if (!playingField.fieldIsFull()) {
                     gameOver = true;
                     noOneWon = true;
                     return;
                 }
-                if (spielfeld.hasPlayer4Chain(playerTurn)) {
+                if (playingField.hasPlayer4Chain(playerTurn)) {
                     gameOver = true;
                     return;
                 }

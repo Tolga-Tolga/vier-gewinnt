@@ -1,17 +1,17 @@
 import java.util.Arrays;
 
-public class Spielfeld {
+public class PlayingField {
     // Play field defined as 0 for free space, 1 for player 1 and 2 for player 2.
-    private int[][] spielfeld;
+    private int[][] playingField;
     private int dim_x;
     private int dim_y;
 
-    public Spielfeld(int dim_x, int dim_y) {
+    public PlayingField(int dim_x, int dim_y) {
         super();
         try {
             this.dim_x = dim_x;
             this.dim_y = dim_y;
-            spielfeld = new int[dim_y][dim_x];
+            playingField = new int[dim_y][dim_x];
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -21,16 +21,16 @@ public class Spielfeld {
      * Draws the play field.
      */
     public void drawField() {
-        for (int i = 0; i < spielfeld.length; i++) {
-            for (int j = 0; j < spielfeld[i].length * 2 + 1; j++) {
+        for (int i = 0; i < playingField.length; i++) {
+            for (int j = 0; j < playingField[i].length * 2 + 1; j++) {
                 System.out.print('-');
             }
             System.out.println();
-            for (int j = 0; j < spielfeld[i].length; j++) {
+            for (int j = 0; j < playingField[i].length; j++) {
                 if (j == 0) {
                     System.out.print('|');
                 }
-                switch (spielfeld[i][j]) {
+                switch (playingField[i][j]) {
                     case 0:
                         System.out.print(' ');
                         break;
@@ -68,8 +68,8 @@ public class Spielfeld {
             return 2;
         try {
             for (int i = dim_y-1; i >= 0; i--) {
-                if (spielfeld[i][pos] == 0) {
-                    spielfeld[i][pos] = player;
+                if (playingField[i][pos] == 0) {
+                    playingField[i][pos] = player;
                     return 0;
                 }
             }
@@ -88,8 +88,8 @@ public class Spielfeld {
         // Check for horizontal chains
         for (int y = 0; y < dim_y; y++) {
             for (int x = 0; x <= dim_x - 4; x++) {
-                if (spielfeld[y][x] == player && spielfeld[y][x + 1] == player &&
-                    spielfeld[y][x + 2] == player && spielfeld[y][x + 3] == player) {
+                if (playingField[y][x] == player && playingField[y][x + 1] == player &&
+                    playingField[y][x + 2] == player && playingField[y][x + 3] == player) {
                     return true;
                 }
             }
@@ -98,8 +98,8 @@ public class Spielfeld {
         // Check for vertical chains
         for (int x = 0; x < dim_x; x++) {
             for (int y = 0; y <= dim_y - 4; y++) {
-                if (spielfeld[y][x] == player && spielfeld[y + 1][x] == player &&
-                    spielfeld[y + 2][x] == player && spielfeld[y + 3][x] == player) {
+                if (playingField[y][x] == player && playingField[y + 1][x] == player &&
+                    playingField[y + 2][x] == player && playingField[y + 3][x] == player) {
                     return true;
                 }
             }
@@ -108,8 +108,8 @@ public class Spielfeld {
         // Check for diagonal chains (from lower left to upper right)
         for (int y = 3; y < dim_y; y++) {
             for (int x = 0; x <= dim_x - 4; x++) {
-                if (spielfeld[y][x] == player && spielfeld[y - 1][x + 1] == player &&
-                    spielfeld[y - 2][x + 2] == player && spielfeld[y - 3][x + 3] == player) {
+                if (playingField[y][x] == player && playingField[y - 1][x + 1] == player &&
+                    playingField[y - 2][x + 2] == player && playingField[y - 3][x + 3] == player) {
                     return true;
                 }
             }
@@ -118,8 +118,8 @@ public class Spielfeld {
         // Check for diagonal chains (from upper left to lower right)
         for (int y = 0; y <= dim_y - 4; y++) {
             for (int x = 0; x <= dim_x - 4; x++) {
-                if (spielfeld[y][x] == player && spielfeld[y + 1][x + 1] == player &&
-                    spielfeld[y + 2][x + 2] == player && spielfeld[y + 3][x + 3] == player) {
+                if (playingField[y][x] == player && playingField[y + 1][x + 1] == player &&
+                    playingField[y + 2][x + 2] == player && playingField[y + 3][x + 3] == player) {
                     return true;
                 }
             }
@@ -129,6 +129,6 @@ public class Spielfeld {
     }    
 
     public boolean fieldIsFull() {
-        return Arrays.stream(spielfeld).flatMapToInt(Arrays::stream).anyMatch(t -> t == 0);
+        return Arrays.stream(playingField).flatMapToInt(Arrays::stream).anyMatch(t -> t == 0);
     }
 }
